@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Susmitha 🦄</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+  color:white;
+  text-align:center;
+  overflow-x:hidden;
+  transition:0.5s;
+}
+
+.dark{
+  background:#111;
+  color:#fff;
+}
+
+/* INTRO */
+.intro{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  cursor:pointer;
+}
+
+.intro h1{
+  font-size:2rem;
+  animation:pulse 2s infinite alternate;
+}
+
+@keyframes pulse{
+  from{opacity:0.6;}
+  to{opacity:1;}
+}
+
+.container{
+  display:none;
+  padding:30px 15px;
+}
+
+h1{
+  font-size:1.9rem;
+  margin-bottom:10px;
+}
+
+.countdown{
+  font-size:1.4rem;
+  margin:15px 0;
+  font-weight:700;
+}
+
+button{
+  padding:8px 18px;
+  border:none;
+  border-radius:20px;
+  margin:10px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.toggle{
+  background:#000;
+  color:#fff;
+}
+
+.surprise{
+  background:#fff;
+  color:#ff4d6d;
+}
+
+/* SLIDER */
+.slider{
+  position:relative;
+  max-width:400px;
+  margin:30px auto;
+}
+
+.slide{
+  display:none;
+}
+
+.slide img{
+  width:100%;
+  border-radius:15px;
+}
+
+.caption{
+  margin-top:10px;
+  font-size:1rem;
+}
+
+.active{
+  display:block;
+}
+
+.arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:22px;
+  background:rgba(0,0,0,0.4);
+  padding:5px 10px;
+  cursor:pointer;
+  border-radius:50%;
+}
+
+.left{ left:10px; }
+.right{ right:10px; }
+
+/* HEARTS */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  width:15px;
+  height:15px;
+  background:red;
+  transform:rotate(45deg);
+  animation:float 6s linear forwards;
+}
+
+.heart::before,
+.heart::after{
+  content:'';
+  position:absolute;
+  width:15px;
+  height:15px;
+  background:red;
+  border-radius:50%;
+}
+
+.heart::before{ top:-7px; }
+.heart::after{ left:-7px; }
+
+@keyframes float{
+  to{
+    transform:translateY(-110vh) rotate(720deg);
+    opacity:0;
+  }
+}
+
+/* BUTTERFLY */
+.butterfly{
+  position:fixed;
+  font-size:22px;
+  animation:fly linear forwards;
+}
+
+@keyframes fly{
+  from{ transform:translateX(-10vw) translateY(0); }
+  to{ transform:translateX(110vw) translateY(-100vh); }
+}
+
+/* SPARKLES */
+.sparkle{
+  position:fixed;
+  width:6px;
+  height:6px;
+  background:white;
+  border-radius:50%;
+  animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+  from{opacity:0.2;}
+  to{opacity:1;}
+}
+
+/* FOOTER */
+.footer{
+  margin-top:40px;
+  padding:15px;
+  font-size:0.9rem;
+  opacity:0.8;
+}
+
+.dark .footer{
+  opacity:0.6;
+}
+
+@media(max-width:480px){
+  h1{font-size:1.5rem;}
+  .countdown{font-size:1.2rem;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="intro" onclick="startExperience()">
+  <h1>🦄 A Magical Surprise For Susmitha ✨<br>Tap To Enter</h1>
+</div>
+
+<div class="container" id="mainContent">
+
+<button class="toggle" onclick="toggleDark()">🌙 Toggle Mode</button>
+<button onclick="playMusic()">🎵 Play Music</button>
+
+<h1>🎉 Happy Birthday Susmitha 🦄🎂</h1>
+
+<h3>Countdown to Next Feb 18</h3>
+<div class="countdown" id="countdown"></div>
+
+<div class="slider">
+
+<div class="slide active">
+<img src="Gallary/DP1.png">
+<div class="caption">You shine brighter than any star ✨ (Avesam Star)</div>
+</div>
+
+<div class="slide">
+<img src="Gallary/DP2.png">
+<div class="caption">Pure magic, pure heart 🦄💖(Dubai Vellavu kada ani petta)</div>
+</div>
+
+<div class="slide">
+<img src="Gallary/DP3.png">
+<div class="caption">Endless happiness always 🎉(Paddhathi tag )</div>
+</div>
+
+<div class="arrow left" onclick="prevSlide()">❮</div>
+<div class="arrow right" onclick="nextSlide()">❯</div>
+
+</div>
+
+<button class="surprise" onclick="showSurprise()">🎁 Magical Message</button>
+
+<div id="hiddenMsg" style="display:none;margin-top:15px;color:yellow;">
+You are rare. You are powerful. Never stop believing in yourself 💫
+</div>
+
+<footer class="footer">
+  © <span id="year"></span> Made with ❤️ by <strong>Tejakrishna</strong>
+</footer>
+
+</div>
+
+<audio id="bgMusic" src="Gallary/HBM.mp3" loop></audio>
+
+<script>
+
+/* AUTO YEAR */
+document.getElementById("year").textContent=new Date().getFullYear();
+
+/* START */
+function startExperience(){
+  document.querySelector(".intro").style.display="none";
+  document.getElementById("mainContent").style.display="block";
+  playMusic();
+}
+
+/* MUSIC */
+function playMusic(){
+  const music=document.getElementById("bgMusic");
+  music.play().catch(error=>console.log("Autoplay blocked:",error));
+}
+
+/* DARK MODE */
+function toggleDark(){
+  document.body.classList.toggle("dark");
+}
+
+/* SURPRISE */
+function showSurprise(){
+  document.getElementById("hiddenMsg").style.display="block";
+}
+
+/* HEARTS */
+function createHeart(){
+  const heart=document.createElement("div");
+  heart.classList.add("heart");
+  heart.style.left=Math.random()*window.innerWidth+"px";
+  heart.style.background="hsl("+Math.random()*360+",70%,60%)";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),6000);
+}
+setInterval(createHeart,700);
+
+/* BUTTERFLIES */
+function createButterfly(){
+  const butterfly=document.createElement("div");
+  butterfly.classList.add("butterfly");
+  butterfly.innerHTML="🦋";
+  butterfly.style.top=Math.random()*window.innerHeight+"px";
+  butterfly.style.animationDuration=(Math.random()*10+5)+"s";
+  document.body.appendChild(butterfly);
+  setTimeout(()=>butterfly.remove(),15000);
+}
+setInterval(createButterfly,5000);
+
+/* SPARKLES */
+function createSparkle(){
+  const sparkle=document.createElement("div");
+  sparkle.classList.add("sparkle");
+  sparkle.style.left=Math.random()*window.innerWidth+"px";
+  sparkle.style.top=Math.random()*window.innerHeight+"px";
+  document.body.appendChild(sparkle);
+  setTimeout(()=>sparkle.remove(),2000);
+}
+setInterval(createSparkle,300);
+
+/* COUNTDOWN */
+function updateCountdown(){
+  const now=new Date();
+  const target=new Date("Feb 18, 2026 00:00:00");
+  const diff=target-now;
+
+  const days=Math.floor(diff/(1000*60*60*24));
+  const hours=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  const mins=Math.floor((diff%(1000*60*60))/(1000*60));
+  const secs=Math.floor((diff%(1000*60))/1000);
+
+  document.getElementById("countdown").innerHTML=
+  days+"d "+hours+"h "+mins+"m "+secs+"s";
+}
+setInterval(updateCountdown,1000);
+updateCountdown();
+
+/* SLIDER */
+let slideIndex=0;
+const slides=document.querySelectorAll(".slide");
+
+function showSlide(index){
+  slides.forEach(slide=>slide.classList.remove("active"));
+  slides[index].classList.add("active");
+}
+
+function nextSlide(){
+  slideIndex=(slideIndex+1)%slides.length;
+  showSlide(slideIndex);
+}
+
+function prevSlide(){
+  slideIndex=(slideIndex-1+slides.length)%slides.length;
+  showSlide(slideIndex);
+}
+
+setInterval(nextSlide,4000);
+
+</script>
+
+</body>
+</html>
