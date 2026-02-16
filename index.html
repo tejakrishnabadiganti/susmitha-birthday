@@ -31,10 +31,10 @@
   transition:0.3s;
 }
 
-.music-floating:hover{
+/* .music-floating:hover{
   background:#fff;
   color:#000;
-}
+} */
 
 
 body{
@@ -230,7 +230,7 @@ button:hover{
 </head>
 
 <body>
-  <button id="musicToggleTop" class="music-floating" onclick="toggleMusicTop()">🔊</button>
+  <!-- <button id="musicToggleTop" class="music-floating" onclick="toggleMusicTop()">🔊</button> -->
 
 
 <div class="marquee">
@@ -449,17 +449,17 @@ document.body.classList.remove("light-mode");
 let music = document.getElementById("bgMusic");
 let musicTopPlaying = false;
 
-function toggleMusicTop(){
-  const btn = document.getElementById("musicToggleTop");
+// function toggleMusicTop(){
+//   const btn = document.getElementById("musicToggleTop");
 
-  if(music.paused){
-    music.play();
-    btn.innerHTML = "🔊";
-  }else{
-    music.pause();
-    btn.innerHTML = "🔇";
-  }
-}
+//   if(music.paused){
+//     music.play();
+//     btn.innerHTML = "🔊";
+//   }else{
+//     music.pause();
+//     btn.innerHTML = "🔇";
+//   }
+// }
 
 
 </script>
